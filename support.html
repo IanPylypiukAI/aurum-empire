@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurum Empire — Support</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c96e;
+      --gold-dim: #7a6030;
+      --ink: #0d0b08;
+      --parchment: #1a1710;
+      --parchment-light: #221f18;
+      --text: #d4c89a;
+      --text-dim: #8a7e5c;
+      --border: rgba(201,168,76,0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--ink);
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 32px 120px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 72px;
+      animation: fadeDown 0.9s ease both;
+    }
+
+    .crown {
+      font-size: 48px;
+      margin-bottom: 16px;
+      display: block;
+      filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 12px rgba(201,168,76,0.3)); }
+      to   { filter: drop-shadow(0 0 28px rgba(201,168,76,0.6)); }
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(28px, 6vw, 46px);
+      letter-spacing: 0.08em;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      font-size: 18px;
+      color: var(--text-dim);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 32px auto;
+      max-width: 320px;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim));
+    }
+    .divider::after {
+      background: linear-gradient(to left, transparent, var(--gold-dim));
+    }
+    .divider-diamond {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: var(--parchment-light);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 32px 36px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.8s ease both;
+    }
+    .card:nth-child(1) { animation-delay: 0.15s; }
+    .card:nth-child(2) { animation-delay: 0.28s; }
+    .card:nth-child(3) { animation-delay: 0.41s; }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      opacity: 0.6;
+    }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .card h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    /* FAQ */
+    .faq-title {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      text-align: center;
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      margin-bottom: 10px;
+      background: var(--parchment-light);
+      animation: fadeUp 0.8s ease both;
+      overflow: hidden;
+    }
+    details:nth-child(1) { animation-delay: 0.55s; }
+    details:nth-child(2) { animation-delay: 0.63s; }
+    details:nth-child(3) { animation-delay: 0.71s; }
+    details:nth-child(4) { animation-delay: 0.79s; }
+
+    summary {
+      padding: 18px 24px;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    summary:hover { color: var(--gold-light); }
+    summary::after {
+      content: '＋';
+      color: var(--gold-dim);
+      font-size: 16px;
+      transition: transform 0.3s;
+    }
+    details[open] summary::after {
+      transform: rotate(45deg);
+      color: var(--gold);
+    }
+    details[open] summary { color: var(--gold-light); }
+
+    .faq-body {
+      padding: 0 24px 20px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* Contact CTA */
+    .contact-block {
+      text-align: center;
+      margin-top: 64px;
+      animation: fadeUp 0.8s 0.85s ease both;
+    }
+
+    .contact-block p {
+      font-size: 18px;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 36px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 1px;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.3s;
+    }
+    .email-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+      z-index: 0;
+    }
+    .email-btn:hover::before { transform: scaleX(1); }
+    .email-btn:hover { color: var(--ink); }
+    .email-btn span { position: relative; z-index: 1; }
+
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      font-size: 13px;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      opacity: 0.6;
+      animation: fadeUp 0.8s 1s ease both;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <span class="crown">♛</span>
+      <h1>Aurum Empire</h1>
+      <p class="subtitle">Player Support</p>
+      <div class="divider"><div class="divider-diamond"></div></div>
+    </header>
+
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">⚔️</span>
+        <h2>About the Game</h2>
+        <p>Aurum Empire is a mobile economic strategy game where you build trade empires, manage production chains, negotiate diplomatic deals, and dominate global markets. Available on iOS.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">💎</span>
+        <h2>Subscriptions & Purchases</h2>
+        <p>VIP Diplomat and VIP Cargo subscriptions are managed through your Apple ID. To cancel or manage your subscription, go to <strong>Settings → Apple ID → Subscriptions</strong> on your device.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔐</span>
+        <h2>Account & Data</h2>
+        <p>Your account is secured via email authentication. If you need to delete your account or request your data, contact us at the email below and we will process your request within 30 days.</p>
+      </div>
+    </div>
+
+    <p class="faq-title">Frequently Asked Questions</p>
+
+    <details>
+      <summary>My purchase isn't being applied — what should I do?</summary>
+      <div class="faq-body">First, make sure you have a stable internet connection and restart the app. If the issue persists, tap "Restore Purchases" in the in-app Shop. If it still doesn't work, contact us with your Apple ID email and we'll resolve it manually.</div>
+    </details>
+
+    <details>
+      <summary>How do I restore purchases on a new device?</summary>
+      <div class="faq-body">Log in with the same Apple ID you used to make the original purchase, then tap "Restore Purchases" in the Shop. Your VIP status will be restored automatically.</div>
+    </details>
+
+    <details>
+      <summary>The app crashes or won't load — how do I fix it?</summary>
+      <div class="faq-body">Try force-closing and reopening the app. If the problem continues, delete and reinstall it — your progress is saved server-side and won't be lost. Make sure your iOS version is up to date.</div>
+    </details>
+
+    <details>
+      <summary>How do I report a bug or suggest a feature?</summary>
+      <div class="faq-body">We love hearing from players. Send us an email with a description of the issue or idea. Screenshots are always helpful. We read every message.</div>
+    </details>
+
+    <div class="contact-block">
+      <p>Didn't find your answer? Write to us directly.</p>
+      <a href="mailto:aurum.empire.support@gmail.com" class="email-btn">
+        <span>✉ aurum.empire.support@gmail.com</span>
+      </a>
+    </div>
+
+    <footer>
+      &copy; 2025 Aurum Empire &nbsp;·&nbsp; All rights reserved
+    </footer>
+
+  </div>
+</body>
+</html>
